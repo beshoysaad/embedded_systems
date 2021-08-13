@@ -1,0 +1,9 @@
+#ifndef EMBEDDEDSYSTEMS18_OUTCOME_H
+#define EMBEDDEDSYSTEMS18_OUTCOME_H
+
+#define OUTCOME_LOSS            0
+#define OUTCOME_WIN             1
+#define OUTCOME_TIE             2
+#define OUTCOME_DISQUAL         3
+
+#endif //EMBEDDEDSYSTEMS18_OUTCOME_H

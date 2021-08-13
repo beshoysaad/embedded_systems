@@ -1,0 +1,7 @@
+#ifndef EMBEDDEDSYSTEMS18_IDS_H
+#define EMBEDDEDSYSTEMS18_IDS_H
+
+#define SCOUT_ID            16
+#define COLLECTOR_ID        17
+
+#endif //EMBEDDEDSYSTEMS18_IDS_H

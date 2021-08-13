@@ -1,0 +1,212 @@
+#X3D V3.3 utf8
+
+PROFILE Immersive
+
+
+DEF top_view Viewpoint {
+  fieldOfView 0.7854
+  description "Top View"
+  position 100 50 150
+}
+DEF side_view Viewpoint {
+  fieldOfView 0.7854
+  description "Side View"
+  orientation 1 0 0 1.5708
+  position 100 -120 45
+}
+DEF arena Transform {
+  translation 100 50 -0.1
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 0 0 0.2
+      }
+    }
+    geometry Box {
+      size 1 1 0.1
+    }
+  }
+}
+DEF out_of_bounds Transform {
+  translation 100 50 -0.2
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 0.2 0 0
+      }
+    }
+    geometry Box {
+      size 1 1 0.1
+    }
+  }
+}
+DEF scout Transform {
+  translation 0 0 1.7
+  rotation 1 0 0 1.5708
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 0 0.8 0
+      }
+    }
+    geometry Cylinder {
+      height 3.4
+    }
+  }
+}
+DEF front_light_sensor Transform {
+  translation 7.5 0 3.4
+  rotation 1 0 0 1.5708
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 0 1 1
+      }
+    }
+    geometry Cylinder {
+      radius 0.5
+      height 0.25
+    }
+  }
+}
+DEF light_spot Transform {
+  translation 100 50 0
+  rotation 1 0 0 1.5708
+  children Shape {
+    appearance Appearance {
+      material Material {
+        transparency 0.5
+        emissiveColor 1 1 0.8
+        diffuseColor 1 1 0.8
+      }
+    }
+    geometry Cylinder {
+      radius 12.75
+      height 0.1
+    }
+  }
+}
+DEF back_light_sensor Transform {
+  translation -7.5 0 3.4
+  rotation 1 0 0 1.5708
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 1 1 0
+      }
+    }
+    geometry Cylinder {
+      radius 0.5
+      height 0.25
+    }
+  }
+}
+DEF left_light_sensor Transform {
+  translation 0 7.5 3.4
+  rotation 1 0 0 1.5708
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 1 0 0.6
+      }
+    }
+    geometry Cylinder {
+      radius 0.5
+      height 0.25
+    }
+  }
+}
+DEF right_light_sensor Transform {
+  translation 0 -7.5 3.4
+  rotation 1 0 0 1.5708
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 0.2 0.2 0.2
+      }
+    }
+    geometry Cylinder {
+      radius 0.5
+      height 0.25
+    }
+  }
+}
+DEF scene_lighting DirectionalLight {
+  direction -0.2 -0.2 -1
+}
+DEF collector Transform {
+  translation 0 100 1.7
+  rotation 0 0 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0.6 0.6
+        }
+      }
+      geometry Box {
+        size 1 1 3.4
+      }
+    }
+    Shape {
+      appearance Appearance {
+        material Material {
+          emissiveColor 1 1 0
+        }
+      }
+      geometry DEF prox_sensor_geom IndexedLineSet {
+        coordIndex [
+          0, 1, -1, 
+          0, 2, -1, 
+          0, 3, -1 
+        ]
+        colorPerVertex FALSE
+        coord Coordinate {
+          point [
+            0 0 0,
+            1.2 0 0,
+            0 -1.2 0,
+            0 1.2 0 
+          ]
+        }
+      }
+    }
+    DEF Prox_Sensor LinePickSensor {
+      pickingGeometry USE prox_sensor_geom
+      pickTarget DEF opponent_scout Transform {
+        translation 200 0 1.7
+        rotation 1 0 0 1.5708
+        children Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0
+            }
+          }
+          geometry Cylinder {
+            height 3.4
+          }
+        }
+      }
+      intersectionType "BOUNDS"
+      sortOrder "CLOSEST"
+    }
+  ]
+}
+DEF opponent_collector Transform {
+  translation 200 100 1.7
+  rotation 0 0 1 3.14159
+  children Shape {
+    appearance Appearance {
+      material Material {
+        diffuseColor 0.2 0 0.2
+      }
+    }
+    geometry Box {
+      size 1 1 3.4
+    }
+  }
+}
+USE opponent_scout
+WorldInfo {
+  enabled TRUE
+}
