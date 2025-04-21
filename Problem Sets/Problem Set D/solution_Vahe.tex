@@ -1,9 +1,0 @@
-\documentclass{article}
-\begin{document}
-	\section*{	Problem D2: Byzantine Nodes }
-	\textbf{a} \\
-	for $n$ generals with $m$ traitors among them $ m < \frac{n}{3}$,
-	let the generals take order from the commander at the first step (initialize values for everyone). After that, at each step, the decision taken by each loyal lieutenant is stored. At each further step one general amongst the lieutenants acts as a commander and sends the decision that has the better value to all other generals (may choose any if the values are equal). All the lieutenants send further that decision to the other lieutenants. At the last step when the last lieutenant acts as a commander, all the loyal generals have the same decision. 
-	Argumentation: the algorithm should work correct  because whenever the new commander is loyal, all the other loyal commanders increment the same value which the commander propagates
-	\textbf{b} \\
-\end{document}
